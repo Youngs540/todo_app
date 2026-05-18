@@ -17,9 +17,9 @@ tasks = load_tasks()
 
 def show_menu():
     print("\n ----------todo menu----------\n")
-    print("1. Add task \n2. View Tasks \n3. Mark task as done \n4. Delete task \n5. Quit\n")
+    print("1. Add task \n2. View Tasks \n3. Mark task as done \n4. Unmark task as done \n5. Delete task \n6. Quit\n")
 
-def add_tasks():
+def add_task():
     task = input("Which task do you want to add : ")
     tasks.append({"task": task, "status": False})
     save_tasks(tasks)
@@ -49,7 +49,23 @@ def mark_done():
     except ValueError :
         print("Please enter a valid option")
 
-def delete_tasks ():
+def unmark_done():
+    view_tasks()
+    if not tasks:
+        print("no tasks added yet")
+        return
+    try :
+        index = int(input("Enter the task no : ")) - 1
+        if 0 <= index < len(tasks):
+            tasks[index]["status"] = False
+            print("task completed... 👍")
+            save_tasks(tasks)
+        else:
+            print("invalid option : ")
+    except ValueError :
+        print("Please enter a valid option")
+
+def delete_task ():
     view_tasks()
     if not tasks:
         print("no tasks added yet")
